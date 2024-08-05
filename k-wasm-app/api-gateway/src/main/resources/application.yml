@@ -1,0 +1,7 @@
+spring:
+  config:
+    import: "optional:configserver:https://config.k-wasm.kr/"
+  cloud:
+    config:
+      name: gateway
+      profile: prod

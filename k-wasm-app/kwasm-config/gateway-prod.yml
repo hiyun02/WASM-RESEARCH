@@ -1,0 +1,33 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    beans:
+      enabled: true
+    info:
+      enabled: true
+    shutdown:
+      enabled: true
+  server:
+    address: localhost
+    port: 14001
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: https://eureka.k-wasm.kr/eureka
+    fetch-registry: true
+spring:
+  application:
+    name: API-GATEWAY
+  boot:
+    admin:
+      client: # Spring Boot Actuator Admin UI Server
+        url: https://manager.k-wasm.kr
+server:
+  port: '14000'
