@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>벡터DB의 데이터를 코사인 유사도를 활용하여 조회하기</title>
+    <link rel="stylesheet" href="/css/table.css"/>
+    <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.serializeObject.min.js"></script>
+    <script type="text/javascript">
+
+        // HTML로딩이 완료되고, 실행됨
+        $(document).ready(function () {
+
+            // 버튼 클릭했을때, 발생되는 이벤트 생성함(onclick 이벤트와 동일함)
+            $("#btnSend").on("click", function () {
+
+                // Ajax 호출해서 멜론차트 조회하기
+                $.ajax({
+                    url: "/vector/v1/generate",
+                    type: "post", // 전송방식은 Post
+                    contentType: "application/json",
+                    dataType: "JSON", // 전송 결과는 JSON으로 받기
+                    data: JSON.stringify($("#f").serializeObject())// form 태그 내 input 등 객체를 자동으로 전송할 형태로 변경하기
+
+                }).then(
+                    function (json) { // 성공
+
+                        $("#vectorData").empty(); // 기존 조회 내용 지우기
+
+                        const result = json.data;
+
+                        for (const data of result) {
+                            $("#vectorData").append("<div class=\"divTableRow\">");
+                            $("#vectorData").append("<div class=\"divTableCell\">" + data.content + "</div>");
+                            $("#vectorData").append("</div>");
+                        }
+
+                    }
+                );
+            })
+        })
+    </script>
+</head>
+<body>
+<h2>벡터DB의 데이터를 코사인 유사도를 활용하여 조회하기</h2>
+<hr/>
+<br/><br/>
+<form name="f" id="f">
+    <div class="divTable minimalistBlack">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableCell" style="width: 30%">검색할 질문</div>
+                <div class="divTableCell" style="width: 70%"><input type="text" name="question"></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button id="btnSend" type="button">조회하기</button>
+    </div>
+</form>
+<br/>
+<br/>
+<div class="divTable minimalistBlack">
+    <div class="divTableHeading">
+        <div class="divTableRow">
+            <div class="divTableHead">조회 결과</div>
+        </div>
+    </div>
+    <div class="divTableBody" id="vectorData">
+    </div>
+</div>
+</body>
+</html>
+
