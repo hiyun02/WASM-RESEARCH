@@ -19,8 +19,8 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
   datasource:
-    password: '1234'
-    username: 'poly'
+    password: '{PASSWORD}'
+    username: '{USERNAME}'
     driver-class-name: 'org.mariadb.jdbc.Driver'
     url: 'jdbc:mariadb://db.k-wasm.kr:3306/myDB'
   application:
@@ -35,8 +35,8 @@ Cloud:
       endPoint: kr.object.ncloudstorage.com
       bucket: findme
     credentials:
-      secret-key: UTSgnAn1ke35fyLiqfUMCQ49nnWJBaXxwt0iJKlU
-      access-key: 8dMZABPGyJBdWbx24GRR
+      secret-key: {SECRET_KEY}
+      access-key: {ACCESS_KEY}
     region:
       static: kr-standard
     stack:
